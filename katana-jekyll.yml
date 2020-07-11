@@ -1,0 +1,26 @@
+version: 2.1
+descrption: Tasks for building a Jekyll site on CircleCI
+
+commands:
+
+  build-site:
+    description: Build the site using Jekyll build
+    steps:
+      - run: "bundle exec jekyll build --trace --lsi --strict_front_matter --profile"
+
+  cache-site:
+    description: Save the built _site dir in the cache
+    steps:
+      - save_cache:
+          paths:
+            - ./_site
+          key: jekyll-site-{{ .Branch }}
+
+
+  restore-site:
+    description: Restore the built _site dir from the cache
+    steps:
+      - restore_cache:
+          keys:
+            - jekyll-site-{{ .Branch }}
+            - jekyll-site-
