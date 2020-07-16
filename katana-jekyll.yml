@@ -14,7 +14,7 @@ commands:
       - save_cache:
           paths:
             - ./_site
-          key: jekyll-site-{{ .Revision }}
+          key: jekyll-site-{{ .Branch }}-{{ .Revision }}
 
 
   restore-site:
@@ -22,5 +22,5 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - jekyll-site-{{ .Revision }}
+            - jekyll-site-{{ .Branch }}-{{ .Revision }}
             - jekyll-site-
